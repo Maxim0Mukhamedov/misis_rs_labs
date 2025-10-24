@@ -1,0 +1,1 @@
+{"prompt": "You need create vocabulary list. List topic is {topic}. First language is {first_language}, second language is {second_language}. Just create two collums: word in first language and translate in second language. Generate {word_count} words. Response is just markdown table without any extra text like '|  |  |\n|---|---|\n|  |  |'."}
