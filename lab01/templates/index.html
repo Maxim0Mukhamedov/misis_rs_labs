@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Описание стран</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+<div id="main">
+    <h1>Сравнение моделей с разным количеством параметров на примере описания страны по положению МКС (и не только).</h1>
+
+    <div id="iss_api">
+        <button onclick="getCoordinates()">Получить координаты МКС</button>
+    </div>
+
+    <div id="user_input">
+        <div>Широта:</div>
+        <input type="text" id="latitude" placeholder="Введите широту">
+
+        <div>Долгота:</div>
+        <input type="text" id="longitude" placeholder="Введите долготу">
+
+        <div><button onclick="userCoordinates()">Ввести координаты</button></div>
+    </div>
+
+    <div id="outputs">
+        <div id="coordinates">неизвестно</div>
+
+        <div id="descriptions">
+            <div>
+                <h2>Gemma3:1b</h2>
+                <div id="gemma3:1b-description">неизвестно</div>
+                <button onclick="getCountryDescription('gemma3:1b')">Получить описание</button>
+            </div>
+
+            <div>
+                <h2>Gemma3:4b</h2>
+                <div id="gemma3-description">неизвестно</div>
+                <button onclick="getCountryDescription('gemma3')">Получить описание</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="static/scripts.js"></script>
+
+</body>
+</html>

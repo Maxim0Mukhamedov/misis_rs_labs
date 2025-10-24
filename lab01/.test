@@ -1,0 +1,5 @@
+Russia 55 37
+Nigeria 10 10
+Komori -12.18 44.23
+
+export OLLAMA_URL=http://123.123.123.123/api/generate
