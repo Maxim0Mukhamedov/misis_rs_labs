@@ -15,7 +15,7 @@ FIRST_MODEL_NAME = "gemma3"
 SECOND_MODEL_NAME = "gemma3:1b"
 
 vocabulary.config.set_config()
-MESSAGES = vocabulary.config.BOT_MESSAGES
+BOT_MESSAGES = vocabulary.config.BOT_MESSAGES
 
 bot = Bot(token=vocabulary.config.TG_BOT_API_TOKEN)
 storage = MemoryStorage()
@@ -37,44 +37,44 @@ async def cmd_start(message: types.Message, state: FSMContext):
     button_gemma1b = InlineKeyboardButton(text=FIRST_MODEL_NAME, callback_data=FIRST_MODEL_NAME)
     button_gemma4b = InlineKeyboardButton(text=SECOND_MODEL_NAME, callback_data=SECOND_MODEL_NAME)
     gemmas_markup = InlineKeyboardMarkup(inline_keyboard=[[button_gemma1b, button_gemma4b]])
-    await message.answer(MESSAGES["choose_model"], reply_markup=gemmas_markup)
+    await message.answer(BOT_MESSAGES["choose_model"], reply_markup=gemmas_markup)
 
 
 @dp.callback_query(Form.llm_model)
 async def process_llm_model(call: types.CallbackQuery, state: FSMContext):
     await state.set_state(Form.topic)
     await state.update_data(model_name=call.data)
-    await call.message.answer(MESSAGES["topic"])
+    await call.message.answer(BOT_MESSAGES["topic"])
 
 
 @dp.message(Form.topic)
 async def process_topic(message: types.Message, state: FSMContext):
     if len(message.text) > 20:
-        await message.reply(MESSAGES["topic_error"])
+        await message.reply(BOT_MESSAGES["topic_error"])
         return
     await state.update_data(topic=message.text)
     await state.set_state(Form.first_language)
-    await message.reply(MESSAGES["first_language_input"])
+    await message.reply(BOT_MESSAGES["first_language_input"])
 
 
 @dp.message(Form.first_language)
 async def process_first_language(message: types.Message, state: FSMContext):
     if len(message.text) > 20:
-        await message.reply(MESSAGES["language_error"])
+        await message.reply(BOT_MESSAGES["language_error"])
         return
     await state.update_data(first_language=message.text)
     await state.set_state(Form.second_language)
-    await message.reply(MESSAGES["second_language_input"])
+    await message.reply(BOT_MESSAGES["second_language_input"])
 
 
 @dp.message(Form.second_language)
 async def process_second_language(message: types.Message, state: FSMContext):
     if len(message.text) > 20:
-        await message.reply(MESSAGES["language_error"])
+        await message.reply(BOT_MESSAGES["language_error"])
         return
     await state.update_data(second_language=message.text)
     await state.set_state(Form.temperature)
-    await message.reply(MESSAGES["temperature_input"])
+    await message.reply(BOT_MESSAGES["temperature_input"])
 
 
 @dp.message(Form.temperature)
@@ -84,11 +84,11 @@ async def process_temperature(message: types.Message, state: FSMContext):
         if not (0.1 <= temperature < 1):
             raise ValueError()
     except ValueError:
-        await message.reply(MESSAGES["temperature_error"])
+        await message.reply(BOT_MESSAGES["temperature_error"])
         return
     await state.update_data(temperature=temperature)
     await state.set_state(Form.word_count)
-    await message.reply(MESSAGES["word_count_input"])
+    await message.reply(BOT_MESSAGES["word_count_input"])
 
 
 @dp.message(Form.word_count)
@@ -98,12 +98,12 @@ async def process_word_count(message: types.Message, state: FSMContext):
         if not (1 <= word_count <= 10):
             raise ValueError()
     except ValueError:
-        await message.reply(MESSAGES["word_count_error"])
+        await message.reply(BOT_MESSAGES["word_count_error"])
         return
     await state.update_data(word_count=word_count)
     user_data = await state.get_data()
 
-    summary = MESSAGES["summary"].format(
+    summary = BOT_MESSAGES["summary"].format(
         model_name=user_data["model_name"],
         topic=user_data["topic"],
         first_language=user_data["first_language"],

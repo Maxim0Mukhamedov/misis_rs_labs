@@ -5,9 +5,11 @@ build/
 dist/
 wheels/
 *.egg-info
+data/
 
 # Virtual environments
 .venv
 .env
 .python-version
 uv.lock
+.DS_Store

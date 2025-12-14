@@ -9,5 +9,5 @@
     "temperature_error": "Введено некорректное число! (0.1 < t < 1)",
     "word_count_input": "Введите количество слов (1 < n < 10):",
     "word_count_error": "Введено некорректное число! (1 < n < 10)",
-    "summary": "Отправляю запрос со следующими параметрами:\nМодель: {model_name}\nТема: {topic}\nПервый язык: {first_language}\nВторой язык: {second_language}\nТемпература: {temperature}\nКоличество слов: {word_count}"
+    "summary": "Отправляю запрос со следующими параметрами:\nМодель: {model_name}\nТема: {topic}\nПервый язык: {first_language}\nВторой язык: {second_language}\nТемпература: {temperature}\nКоличество слов: {word_count}",
 }
